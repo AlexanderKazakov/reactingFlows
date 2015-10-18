@@ -1,19 +1,35 @@
 CC=g++
-CFLAGS=-std=c++11 -c -g
-OBJDIR=src/
-SOURCES=$(OBJDIR)main.cpp $(OBJDIR)NewthonMethod.cpp \
-$(OBJDIR)EquationSystem.cpp $(OBJDIR)GasDetonationSystem.cpp \
-$(OBJDIR)Reagent.cpp $(OBJDIR)Mixture.cpp
+CFLAGS=-std=c++11 -c -g -iquote.
+LFLAGS=-lgsl -lgslcblas
+SRCDIR=src/
+TESTDIR=test/
+
+MAINFILE=$(SRCDIR)main.cpp 
+SOURCES=$(SRCDIR)NewthonMethod.cpp \
+        $(SRCDIR)EquationSystem.cpp $(SRCDIR)GasDetonationSystem.cpp \
+        $(SRCDIR)Reagent.cpp $(SRCDIR)Mixture.cpp
+TESTS=$(TESTDIR)test.cpp $(TESTDIR)LinearEquationSystem.cpp \
+      $(TESTDIR)NonLinearEquationSystem.cpp
+
+MAINOBJ=$(MAINFILE:.cpp=.o)
 OBJECTS=$(SOURCES:.cpp=.o)
+TESTOBJS=$(TESTS:.cpp=.o)
+
 EXECUTABLE=task1
+TEST=test1
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@ -lgsl 
+$(EXECUTABLE): $(OBJECTS) $(MAINOBJ)
+	$(CC) $(OBJECTS) $(MAINOBJ) -o $@ $(LFLAGS)
+
+test: $(TEST)
+	
+$(TEST): $(TESTOBJS) $(OBJECTS)
+	$(CC) $(TESTOBJS) $(OBJECTS) -o $@ $(LFLAGS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:   
-	rm -f $(EXECUTABLE) $(OBJECTS)
+	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS)

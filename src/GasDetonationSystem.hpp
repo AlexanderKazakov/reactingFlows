@@ -1,8 +1,8 @@
 #ifndef GASDETONATIONSYSTEM_HPP
 #define	GASDETONATIONSYSTEM_HPP
 
-#include "EquationSystem.hpp"
-#include "Mixture.hpp"
+#include "src/EquationSystem.hpp"
+#include "src/Mixture.hpp"
 
 /**
  * A system of non-linear equations describes the behaviour of the parameters
@@ -20,6 +20,7 @@ public:
 	virtual double getValue(const int i, const double* u) const override;
 	virtual double getDerivative(const int i, const int j,
 	                             const double* u) const override;
+	virtual void getFirstApproximation(double* u) const override;
 
 private:
 	/* The mixture of products of reaction behind the front of discontinuity */

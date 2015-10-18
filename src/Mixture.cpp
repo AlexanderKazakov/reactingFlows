@@ -1,4 +1,4 @@
-#include "Mixture.hpp"
+#include "src/Mixture.hpp"
 
 void Mixture::setReagents(std::vector<std::pair<std::string, double>> _reagents) {
 	for(auto& reagent : _reagents)

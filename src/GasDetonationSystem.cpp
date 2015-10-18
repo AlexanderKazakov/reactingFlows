@@ -1,4 +1,4 @@
-#include "GasDetonationSystem.hpp"
+#include "src/GasDetonationSystem.hpp"
 
 static const double R = 8.31;
 
@@ -94,4 +94,10 @@ double GasDetonationSystem::getDerivative(const int i, const int j,
 	
 	else
 		throw -2;
+}
+
+void GasDetonationSystem::getFirstApproximation(double* u) const {
+	u[0] = 2 * p0;
+	u[1] = eta0 / 2;
+	u[2] = 2* T0;
 }

@@ -3,7 +3,7 @@
 
 #include <utility>
 
-#include "Reagent.hpp"
+#include "src/Reagent.hpp"
 
 /**
  * Represents storage of reagents with their relative mass proportions

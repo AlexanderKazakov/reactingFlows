@@ -9,12 +9,16 @@
  * The number of variables is equal to the number of equations.
  */
 class EquationSystem {
-public:
-	EquationSystem(const int size);
-	
 private:
 	/* Size of \vec{f} and \vec{u} */
 	const int size;
+public:
+	EquationSystem(const int size);
+	int getSize() const;
+	/**
+	 * The square norm of error
+     */
+	double residualError(const double* u) const;
 	/**
 	 * The value of the i-th component of the system function in point u
      * @param i index of \vec{f} component
@@ -32,6 +36,12 @@ private:
      */
 	virtual double getDerivative(const int i, const int j, 
 	                             const double* u) const = 0;
+	/**
+	 * Give some reasonable first approximation for the root of equation
+     * @param u pointer to array of doubles of size == size of the system 
+	 * to place first approximation in
+     */
+	virtual void getFirstApproximation(double* u) const = 0;
 };
 
 #endif	/* EQUATIONSYSTEM_HPP */

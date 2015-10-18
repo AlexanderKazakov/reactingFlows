@@ -1,7 +1,7 @@
 #include <cstdlib>
 
-#include "NewthonMethod.hpp"
-#include "GasDetonationSystem.hpp"
+#include "src/NewthonMethod.hpp"
+#include "src/GasDetonationSystem.hpp"
 
 using namespace std;
 
@@ -14,12 +14,11 @@ using namespace std;
 int main(int argc, char** argv) {
 	
 	GasDetonationSystem gasDetonationSystem;
-	double solution[3];
+	double* solution = new double[gasDetonationSystem.getSize()];
 	NewthonMethod newthonMethod;
 	newthonMethod.solve(gasDetonationSystem, solution);
 	
-	
-	
+	delete [] solution;
 	return 0;
 }
 
