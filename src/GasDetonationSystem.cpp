@@ -97,7 +97,7 @@ double GasDetonationSystem::getDerivative(const int i, const int j,
 }
 
 void GasDetonationSystem::getFirstApproximation(double* u) const {
-	u[0] = 2 * p0;
-	u[1] = eta0 / 2;
-	u[2] = 2* T0;
+	u[0] = p0;
+	u[1] = eta0;
+	u[2] = T0;
 }

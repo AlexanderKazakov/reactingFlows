@@ -1,11 +1,11 @@
 CC=g++
-CFLAGS=-std=c++11 -c -g -iquote.
-LFLAGS=-lgsl -lgslcblas
+CFLAGS=-std=c++11 -c -g -O0 -iquote.
+LFLAGS=-lgsl -lgslcblas -g -O0
 SRCDIR=src/
 TESTDIR=test/
 
 MAINFILE=$(SRCDIR)main.cpp 
-SOURCES=$(SRCDIR)NewthonMethod.cpp \
+SOURCES=$(SRCDIR)NewthonMethod.cpp $(SRCDIR)util.cpp \
         $(SRCDIR)EquationSystem.cpp $(SRCDIR)GasDetonationSystem.cpp \
         $(SRCDIR)Reagent.cpp $(SRCDIR)Mixture.cpp
 TESTS=$(TESTDIR)test.cpp $(TESTDIR)LinearEquationSystem.cpp \
@@ -18,7 +18,7 @@ TESTOBJS=$(TESTS:.cpp=.o)
 EXECUTABLE=task1
 TEST=test1
 
-all: $(EXECUTABLE)
+all: $(EXECUTABLE) $(TEST)
 
 $(EXECUTABLE): $(OBJECTS) $(MAINOBJ)
 	$(CC) $(OBJECTS) $(MAINOBJ) -o $@ $(LFLAGS)

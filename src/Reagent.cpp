@@ -56,11 +56,11 @@ double Reagent::Cv(const double& T) const {
 	double ans = - 1.0;
 	
 	if ( T <= 1e+3 )
-		for(uint i = 0; i < a.size(); i++)
+		for(int i = 0; i < (int) a.size(); i++)
 			ans += a[i] * pow(T, i-2);
 	
 	else
-		for(uint i = 0; i < b.size(); i++)
+		for(int i = 0; i < (int) b.size(); i++)
 			ans += b[i] * pow(T, i-2);
 	
 	return ans;
@@ -68,13 +68,13 @@ double Reagent::Cv(const double& T) const {
 
 double Reagent::CvDer(const double& T) const {
 	double ans = 0.0;
-	
+
 	if ( T <= 1e+3 )
-		for(uint i = 0; i < a.size(); i++)
+		for(int i = 0; i < (int) a.size(); i++)
 			ans += (i-2) * a[i] * pow(T, i-3);
 	
 	else
-		for(uint i = 0; i < b.size(); i++)
+		for(int i = 0; i < (int) b.size(); i++)
 			ans += (i-2) * b[i] * pow(T, i-3);
 	
 	return ans;

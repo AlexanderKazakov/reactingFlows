@@ -1,6 +1,6 @@
 #include "src/NewthonMethod.hpp"
 
-#include <iostream>
+#include "src/util.hpp"
 
 void NewthonMethod::solve(const EquationSystem& system, double* solution) {
 	int n = system.getSize();
@@ -41,10 +41,15 @@ void NewthonMethod::doIteration(const EquationSystem& system, double* solution) 
 		for(int j = 0; j < n; j++)
 			gsl_matrix_set(A, i, j, system.getDerivative(i, j, solution));
 
+	printSLE(A, x, b, n);
+	checkSLE(A, x, b, n);
+	
 	gsl_linalg_LU_decomp(A, gslPermutation, &gslSignum);
 	gsl_linalg_LU_solve(A, gslPermutation, b, x);
 	
-	for(int i = 0; i < n; i++)
-		solution[i] += gsl_vector_get(x, i) / 2;
+	for(int i = 0; i < n; i++) {
+		const double deltaU = gsl_vector_get(x, i) / 2;
+		solution[i] += deltaU;
+	}
 }
 

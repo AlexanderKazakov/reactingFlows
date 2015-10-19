@@ -39,6 +39,6 @@ double NonLinearEquationSystem::getDerivative(const int i, const int j, const do
 }
 
 void NonLinearEquationSystem::getFirstApproximation(double* u) const {
-	u[0] = 1.1; u[1] = 2.1;
+	u[0] = 3; u[1] = 5;
 }
 
