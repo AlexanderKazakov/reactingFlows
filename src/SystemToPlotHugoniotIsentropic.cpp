@@ -1,9 +1,10 @@
 #include <math.h>
 
-#include "src/GasDetonationSystem.hpp"
+#include "src/SystemToPlotHugoniotIsentropic.hpp"
 
 
-GasDetonationSystem::GasDetonationSystem() : EquationSystem(3) {
+SystemToPlotHugoniotIsentropic::SystemToPlotHugoniotIsentropic
+	(const double& givenEta) : EquationSystem(3), givenEta(givenEta) {
 	
 	before.setReagents({std::make_pair("C2H2", 0.0705),
 	                    std::make_pair("O2",   0.2168),
@@ -19,7 +20,7 @@ GasDetonationSystem::GasDetonationSystem() : EquationSystem(3) {
 	eta0 = R * T0 * before.getMeanInverseMolarMass() / p0;
 }
 
-double GasDetonationSystem::getValue(const int i, const double* u) const {
+double SystemToPlotHugoniotIsentropic::getValue(const int i, const double* u) const {
 	const double p = u[0];
 	const double eta = u[1];
 	const double T = u[2];
@@ -30,7 +31,7 @@ double GasDetonationSystem::getValue(const int i, const double* u) const {
 			 -  Q * (behind.gamma(T) - 1) * (before.gamma(T0) - 1);
 	
 	else if (i == 1)
-		return eta * (p - p0) + behind.gamma(T) * p * (eta - eta0);
+		return eta - givenEta;
 	
 	else if (i == 2)
 		return p * eta - R * T * behind.getMeanInverseMolarMass();
@@ -39,7 +40,7 @@ double GasDetonationSystem::getValue(const int i, const double* u) const {
 		throw -1;
 }
 
-double GasDetonationSystem::getDerivative(const int i, const int j,
+double SystemToPlotHugoniotIsentropic::getDerivative(const int i, const int j,
                                           const double* u) const {
 	const double p = u[0];
 	const double eta = u[1];
@@ -66,13 +67,13 @@ double GasDetonationSystem::getDerivative(const int i, const int j,
 	else if (i == 1) {
 		
 		if (j == 0)
-			return eta + behind.gamma(T) * (eta - eta0);
+			return 0;
 		
 		else if (j == 1)
-			return (p - p0) + behind.gamma(T) * p;
+			return 1;
 		
 		else if (j == 2)
-			return p * (eta - eta0) * behind.gammaDer(T);
+			return 0;
 		
 		else 
 			throw -2;
@@ -97,20 +98,13 @@ double GasDetonationSystem::getDerivative(const int i, const int j,
 		throw -2;
 }
 
-void GasDetonationSystem::getFirstApproximation(double* u) const {
-#if DEFLAGRATION
-	u[0] = p0 / 10;
-	u[1] = eta0 * 10;
-	u[2] = T0 / 10;
-#else
-	u[0] = 1e+6*p0;
-	u[1] = eta0/100;
-	u[2] = 100*T0;
-#endif
-	
+void SystemToPlotHugoniotIsentropic::getFirstApproximation(double* u) const {
+	u[0] = p0;
+	u[1] = givenEta;
+	u[2] = T0;	
 }
 
-void GasDetonationSystem::printCompleteSolution(const double* u) const {
+void SystemToPlotHugoniotIsentropic::printCompleteSolution(const double* u) const {
 	const double p = u[0] * p_dimensionless;
 	const double eta = u[1]; // eta_dimensionless = 1
 	const double T = u[2] * T_dimensionless;
@@ -125,8 +119,7 @@ void GasDetonationSystem::printCompleteSolution(const double* u) const {
 		<< "T = " << T << "\n"
 		<< "v = " << v << "\n"
 		<< "D = " << D << "\n"
-		<< "gamma = " << gamma << "\n"
-		<< "eta0 = " << eta0 << "\n";
+		<< "gamma = " << gamma << "\n";
 
 }
 

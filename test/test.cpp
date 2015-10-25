@@ -13,6 +13,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	NewthonMethod newthonMethod;
+	newthonMethod.logging = true;
 	
 	std::cout << "Testing on system of linear equations: \n";
 	LinearEquationSystem linearEquationSystem;

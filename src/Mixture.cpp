@@ -20,7 +20,7 @@ double Mixture::gamma(const double& T) const {
 	double meanCv = 0; // average thermal capacity in units of R
 	for(auto& reagent : reagents)
 		meanCv += reagent.second * reagent.first.Cv(T) / reagent.first.mu;
-	return 1 + meanInverseMolarMass / meanCv;
+	return 1 + R * meanInverseMolarMass / meanCv;
 }
 
 double Mixture::gammaDer(const double& T) const {
@@ -32,5 +32,5 @@ double Mixture::gammaDer(const double& T) const {
 	for(auto& reagent : reagents)
 		meanCvDer += reagent.second * reagent.first.CvDer(T) / reagent.first.mu;
 	
-	return - meanInverseMolarMass / (meanCv*meanCv) * meanCvDer;
+	return - R * meanInverseMolarMass / (meanCv*meanCv) * meanCvDer;
 }

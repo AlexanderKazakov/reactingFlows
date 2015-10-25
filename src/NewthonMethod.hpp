@@ -7,6 +7,8 @@
 
 class NewthonMethod {
 public:
+	bool logging = false;
+
 	/**
 	 * Solve given system of equations using Neuthon's Method
 	 * The system must have two first derivatives confined 
@@ -27,8 +29,11 @@ private:
 	gsl_permutation *gslPermutation;
 	int gslSignum;
 	
+	/* to store step on previous iteration */
+	double *previousDelta;
+	
 	/**
-	 * Do next iteration of Newthon's method
+	 * Do next iteration
      */
 	void doIteration(const EquationSystem& system, double* solution);
 

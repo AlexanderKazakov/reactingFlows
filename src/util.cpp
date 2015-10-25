@@ -49,7 +49,7 @@ void checkSLE(const gsl_matrix* A, const gsl_vector* x,
 	}
 	double conditionNumber = normA * normInvA;
 	//if (conditionNumber > 1000)
-		print("Condition number of matrix of SLE is ", conditionNumber);
+		info("Condition number of matrix of SLE is ", conditionNumber);
 	gsl_vector_free(row);
 	/*
 	 * Before uncomment that code make sure that matrix A is saved after 

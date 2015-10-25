@@ -53,31 +53,33 @@ Reagent::Reagent(const std::string name) : name(name) {
 }
 
 double Reagent::Cv(const double& T) const {
+	const double t = T * T_dimensionless; // temperature in SI system
 	double ans = - 1.0;
 	
-	if ( T <= 1e+3 )
+	if ( t <= 1e+3 )
 		for(int i = 0; i < (int) a.size(); i++)
-			ans += a[i] * pow(T, i-2);
+			ans += a[i] * pow(t, i-2);
 	
 	else
 		for(int i = 0; i < (int) b.size(); i++)
-			ans += b[i] * pow(T, i-2);
+			ans += b[i] * pow(t, i-2);
 	
-	return ans;
+	return R * ans;
 }
 
 double Reagent::CvDer(const double& T) const {
+	const double t = T * T_dimensionless; // temperature in SI system
 	double ans = 0.0;
 
-	if ( T <= 1e+3 )
+	if ( t <= 1e+3 )
 		for(int i = 0; i < (int) a.size(); i++)
-			ans += (i-2) * a[i] * pow(T, i-3);
+			ans += (i-2) * a[i] * pow(t, i-3);
 	
 	else
 		for(int i = 0; i < (int) b.size(); i++)
-			ans += (i-2) * b[i] * pow(T, i-3);
+			ans += (i-2) * b[i] * pow(t, i-3);
 	
-	return ans;
+	return R * ans;
 }
 
 double Reagent::pow(const double& base, const int exponent) const {

@@ -1,22 +1,21 @@
-#ifndef GASDETONATIONSYSTEM_HPP
-#define	GASDETONATIONSYSTEM_HPP
+#ifndef SYSTEMTOPLOTHUGONIOTISENTROPIC_HPP
+#define	SYSTEMTOPLOTHUGONIOTISENTROPIC_HPP
 
 #include "src/EquationSystem.hpp"
 #include "src/Mixture.hpp"
 #include "src/ConstMixture.hpp"
 
 /**
- * A system of non-linear equations describes the behaviour of the parameters
- * of the gas behind the front of discontinuity caused by detonation
+ * A system to calculate Hugoniot isentropic parameters by given eta
  * p - pressure
  * eta == 1 / rho - unit volume
  * T - absolute temperature
  * Q - energy of the reaction
  * All values in SI
  */
-class GasDetonationSystem : public EquationSystem {
+class SystemToPlotHugoniotIsentropic : public EquationSystem {
 public:
-	GasDetonationSystem();
+	SystemToPlotHugoniotIsentropic(const double& givenEta);
 
 	virtual double getValue(const int i, const double* u) const override;
 	virtual double getDerivative(const int i, const int j,
@@ -24,7 +23,6 @@ public:
 	virtual void getFirstApproximation(double* u) const override;
 	
 	void printCompleteSolution(const double* u) const;
-
 
 private:
 #if CONST_GAMMA
@@ -43,7 +41,11 @@ private:
 	double p0 = 0;
 	double eta0 = 0;
 	double Q = 0;
+	/* given eta */
+	double givenEta = 0;
+	
+	
 };
 
-#endif	/* GASDETONATIONSYSTEM_HPP */
+#endif	/* SYSTEMTOPLOTHUGONIOTISENTROPIC_HPP */
 

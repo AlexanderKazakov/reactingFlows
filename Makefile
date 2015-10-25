@@ -7,7 +7,9 @@ TESTDIR=test/
 MAINFILE=$(SRCDIR)main.cpp 
 SOURCES=$(SRCDIR)NewthonMethod.cpp $(SRCDIR)util.cpp \
         $(SRCDIR)EquationSystem.cpp $(SRCDIR)GasDetonationSystem.cpp \
-        $(SRCDIR)Reagent.cpp $(SRCDIR)Mixture.cpp
+        $(SRCDIR)Reagent.cpp $(SRCDIR)Mixture.cpp $(SRCDIR)ConstMixture.cpp \
+        $(SRCDIR)SystemToPlotHugoniotIsentropic.cpp \
+        $(SRCDIR)SystemToPlotShockIsentropic.cpp
 TESTS=$(TESTDIR)test.cpp $(TESTDIR)LinearEquationSystem.cpp \
       $(TESTDIR)NonLinearEquationSystem.cpp
 
@@ -31,5 +33,13 @@ $(TEST): $(TESTOBJS) $(OBJECTS)
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
 
+exec: $(EXECUTABLE) $(TEST)
+	./task1
+	gnuplot plotter
+	eog hugoniot.png
+
 clean:   
-	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS)
+	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS) \
+	residualError.txt HugoniotIsentropic.txt \ 
+	rm -f hugoniot.png residualError.png hugoniotDeflagration.png \
+	hugoniotDetonation.png
