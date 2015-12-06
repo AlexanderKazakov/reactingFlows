@@ -1,10 +1,10 @@
-#include "src/NewthonMethod.hpp"
+#include "src/NewtonMethod.hpp"
 
 #include <fstream>
 
 #include "src/util.hpp"
 
-void NewthonMethod::solve(const EquationSystem& system, double* solution) {
+void NewtonMethod::solve(const EquationSystem& system, double* solution) {
 	int n = system.getSize();
 	previousDelta = new double[n];
 	for(int i = 0; i < n; i++) previousDelta[i] = 0;
@@ -19,7 +19,7 @@ void NewthonMethod::solve(const EquationSystem& system, double* solution) {
 	const double initialResidualError = system.residualError(solution);
 	if(logging) {
 		residualErrorFile.open("residualError.txt", std::ios::out);
-		std::cout << "NewthonMethod: Residual error before iterations: " <<
+		std::cout << "NewtonMethod: Residual error before iterations: " <<
 			system.residualError(solution) << std::endl;
 		residualErrorFile << system.residualError(solution) / initialResidualError << std::endl;
 	}
@@ -29,7 +29,7 @@ void NewthonMethod::solve(const EquationSystem& system, double* solution) {
 	while(system.residualError(solution) > epsilon) {
 		doIteration(system, solution);
 		if(logging) {
-			std::cout << "NewthonMethod: Residual error after next iteration: " <<
+			std::cout << "NewtonMethod: Residual error after next iteration: " <<
 				system.residualError(solution) << std::endl;
 			residualErrorFile << system.residualError(solution) / initialResidualError << std::endl;
 		}
@@ -45,7 +45,7 @@ void NewthonMethod::solve(const EquationSystem& system, double* solution) {
 	gsl_matrix_free(A);
 }
 
-void NewthonMethod::doIteration(const EquationSystem& system, double* solution) {
+void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
 	int n = system.getSize();
 	for(int i = 0; i < n; i++)
 		gsl_vector_set(b, i, - system.getValue(i, solution));
@@ -60,7 +60,7 @@ void NewthonMethod::doIteration(const EquationSystem& system, double* solution) 
 	gsl_linalg_LU_solve(A, gslPermutation, b, x);
 	
 	for(int i = 0; i < n; i++) {
-		const double deltaU = gsl_vector_get(x, i) / 2;
+		const double deltaU = gsl_vector_get(x, i) / 2; // when 4 test failed
 		solution[i] += deltaU;
 		//previousDelta[i] = deltaU;
 	}

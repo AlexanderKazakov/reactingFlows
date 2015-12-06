@@ -3,22 +3,27 @@ CFLAGS=-std=c++11 -c -g -O0 -iquote.
 LFLAGS=-lgsl -lgslcblas -g -O0
 SRCDIR=src/
 TESTDIR=test/
+BUILDDIR=build/
 
 MAINFILE=$(SRCDIR)main.cpp 
-SOURCES=$(SRCDIR)NewthonMethod.cpp $(SRCDIR)util.cpp \
+SOURCES=$(SRCDIR)NewtonMethod.cpp $(SRCDIR)util.cpp \
         $(SRCDIR)EquationSystem.cpp $(SRCDIR)GasDetonationSystem.cpp \
         $(SRCDIR)Reagent.cpp $(SRCDIR)Mixture.cpp $(SRCDIR)ConstMixture.cpp \
         $(SRCDIR)SystemToPlotHugoniotIsentropic.cpp \
-        $(SRCDIR)SystemToPlotShockIsentropic.cpp
+        $(SRCDIR)SystemToPlotShockIsentropic.cpp \
+        $(SRCDIR)ImplicitEulerMethod.cpp \
+        $(SRCDIR)ImplicitEulerMethodSystem.cpp \
+        $(SRCDIR)ZeldovichSystem.cpp
 TESTS=$(TESTDIR)test.cpp $(TESTDIR)LinearEquationSystem.cpp \
-      $(TESTDIR)NonLinearEquationSystem.cpp
+      $(TESTDIR)NonLinearEquationSystem.cpp \
+      $(TESTDIR)TestODESystem.cpp
 
 MAINOBJ=$(MAINFILE:.cpp=.o)
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJS=$(TESTS:.cpp=.o)
 
-EXECUTABLE=task1
-TEST=test1
+EXECUTABLE=$(BUILDDIR)task1
+TEST=$(BUILDDIR)test1
 
 all: $(EXECUTABLE) $(TEST)
 
@@ -34,7 +39,7 @@ $(TEST): $(TESTOBJS) $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 exec: $(EXECUTABLE) $(TEST)
-	./task1
+	./$(BUILDDIR)task1
 	gnuplot plotter
 	eog hugoniot.png
 

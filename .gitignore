@@ -1,3 +1,5 @@
 nbproject/*
 nbproject
 *.o
+build
+.idea

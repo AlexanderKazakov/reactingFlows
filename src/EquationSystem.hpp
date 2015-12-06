@@ -42,6 +42,8 @@ public:
 	 * to place first approximation in
      */
 	virtual void getFirstApproximation(double* u) const = 0;
+
+	virtual void printCompleteSolution(const double* u) const = 0;
 };
 
 #endif	/* EQUATIONSYSTEM_HPP */

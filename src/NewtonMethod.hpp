@@ -1,16 +1,16 @@
-#ifndef NEWTHONMETHOD_HPP
-#define	NEWTHONMETHOD_HPP
+#ifndef NEWTONMETHOD_HPP
+#define	NEWTONMETHOD_HPP
 
 #include <gsl/gsl_linalg.h>
 
 #include "src/EquationSystem.hpp"
 
-class NewthonMethod {
+class NewtonMethod {
 public:
 	bool logging = false;
 
 	/**
-	 * Solve given system of equations using Neuthon's Method
+	 * Solve given system of equations using Neuton's Method
 	 * The system must have two first derivatives confined 
 	 * and the first derivative must be non-zero.
      * @param system system to solve
@@ -39,5 +39,5 @@ private:
 
 };
 
-#endif	/* NEWTHONMETHOD_HPP */
+#endif	/* NEWTONMETHOD_HPP */
 

@@ -1,15 +1,17 @@
 #include <cstdlib>
 #include <fstream>
 
-#include "src/NewthonMethod.hpp"
+#include "src/NewtonMethod.hpp"
 #include "src/GasDetonationSystem.hpp"
 #include "src/SystemToPlotHugoniotIsentropic.hpp"
 #include "src/SystemToPlotShockIsentropic.hpp"
+#include "src/ZeldovichSystem.hpp"
+#include "src/ImplicitEulerMethod.hpp"
 
 using namespace std;
 
 /*
- * The first home task of the P.Utkin course
+ * Home tasks of the P.Utkin course
  * "Numerical simulation of reacting flows"
  * All values in SI system
  */
@@ -28,13 +30,13 @@ void printFileForIsentropicsPlot(const double& eta0) {
 		
 		SystemToPlotHugoniotIsentropic hugoniot(eta);
 		SystemToPlotShockIsentropic shock(eta);
-		NewthonMethod method;
+		NewtonMethod method;
 		double* solution = new double[hugoniot.getSize()];
-		NewthonMethod newthonMethod;
-		newthonMethod.solve(hugoniot, solution);
+		NewtonMethod newtonMethod;
+		newtonMethod.solve(hugoniot, solution);
 		const double p = solution[0] * p_dimensionless;
 		file << p << "\t";
-		newthonMethod.solve(shock, solution);
+		newtonMethod.solve(shock, solution);
 		const double p2 = solution[0] * p_dimensionless;
 		file << p2 << "\t" << solution[1] << "\t" << solution[2]*T_dimensionless << "\n";
 
@@ -44,15 +46,14 @@ void printFileForIsentropicsPlot(const double& eta0) {
 	file.close();
 }
 
-
-
-int main(int argc, char** argv) {
+/** Task 1 - Newton method etc  */
+int task1(int argc, char** argv) {
 	
 	GasDetonationSystem gasDetonationSystem;
 	double* solution = new double[gasDetonationSystem.getSize()];
-	NewthonMethod newthonMethod;
-	newthonMethod.logging = true;
-	newthonMethod.solve(gasDetonationSystem, solution);
+	NewtonMethod newtonMethod;
+	newtonMethod.logging = true;
+	newtonMethod.solve(gasDetonationSystem, solution);
 	
 	gasDetonationSystem.printCompleteSolution(solution);
 	const double eta = solution[1];
@@ -61,9 +62,17 @@ int main(int argc, char** argv) {
 	
 #if PLOT_ISENTROPICS
 	printFileForIsentropicsPlot(eta);
-#endif
-	
-	
+#endif	
 	return 0;
 }
 
+/** Task 2 - ODE etc */
+int task2(int argc, char** argv) {
+	ImplicitEulerMethod implicitEulerMethod(new ZeldovichSystem(), 0.05, 1.0);
+	implicitEulerMethod.calculate();
+	return 0;
+}
+
+int main(int argc, char** argv) {
+	return task2(argc, argv);
+}

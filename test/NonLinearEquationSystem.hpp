@@ -10,6 +10,7 @@ public:
 	virtual double getDerivative(const int i, const int j, 
 	                             const double* u) const override;
 	virtual void getFirstApproximation(double* u) const override;
+	virtual void printCompleteSolution(const double* u) const override {};
 
 private:
 	
