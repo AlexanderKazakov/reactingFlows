@@ -7,25 +7,41 @@ ImplicitEulerMethod::ImplicitEulerMethod(EquationSystem* rightSideOfODE,
 		implicitEulerMethodSystem(rightSideOfODE, tau), tau(tau), T(T) {	
 	
 	theNewtonMethod.logging = false;
+	resultFile.open("Zeldovich.txt", std::ios::out);
+}
+
+ImplicitEulerMethod::~ImplicitEulerMethod() {
+	resultFile.close();
 }
 
 void ImplicitEulerMethod::calculate() {
-	double* initialApprox = new double [implicitEulerMethodSystem.getSize()];
-	implicitEulerMethodSystem.getFirstApproximation(initialApprox);
-	implicitEulerMethodSystem.printCompleteSolution(initialApprox);
-	while (t < T) {
-		nextStep();
-	}
+	double* initial = new double [implicitEulerMethodSystem.getSize()];
+	implicitEulerMethodSystem.getFirstApproximation(initial);
+	implicitEulerMethodSystem.printCompleteSolution(initial);
+	printSolutionToFile(t, initial);
+	
+	while (t < T && nextStep());
+	delete [] initial;
 }
 
-void ImplicitEulerMethod::nextStep() {
+bool ImplicitEulerMethod::nextStep() {
 	double* solution = new double[implicitEulerMethodSystem.getSize()];
-	theNewtonMethod.solve(implicitEulerMethodSystem, solution);
-	
+	if( !theNewtonMethod.solve(implicitEulerMethodSystem, solution) ) {
+		return false;
+	}
 	implicitEulerMethodSystem.printCompleteSolution(solution);
+	printSolutionToFile(t, solution);
 	
 	implicitEulerMethodSystem.setPreviousValue(solution);
 	delete [] solution;
 	t += tau;
+	return true;
 }
 
+void ImplicitEulerMethod::printSolutionToFile(double t, double* solution) {
+	resultFile << t << '\t';
+	for(int i = 0; i < implicitEulerMethodSystem.getSize(); i++) {
+		resultFile << solution[i] << '\t';
+	}
+	resultFile << std::endl;
+}

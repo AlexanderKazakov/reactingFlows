@@ -1,0 +1,97 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: input   start ] */
+dZdx : - (A * rho * Z / u) * exp (- Ea / R / T);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dZdx : subst(mu * p / (rho * R), T, dZdx);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudx : - Q * u * (gamma - 1) * dZdx / (c*c - u*u);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudx : subst(sqrt(gamma * R * T / mu), c, dudx);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudx : subst(mu * p / (rho * R), T, dudx);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+drhodx : - (rho / u) * dudx;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dpdx : - rho * u * dudx;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+drhodxDrho : factor(diff(drhodx,rho,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+drhodxDu : factor(diff(drhodx, u, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+drhodxDp : factor(diff(drhodx, p, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+drhodxDZ : factor(diff(drhodx, Z, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudxDrho : factor(diff(dudx, rho, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudxDu : factor(diff(dudx, u, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudxDp : factor(diff(dudx, p, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dudxDZ : factor(diff(dudx, Z, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dpdxDrho : factor(diff(dpdx, rho, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dpdxDu : factor(diff(dpdx, u, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dpdxDp : factor(diff(dpdx, p, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dpdxDZ : factor(diff(dpdx, Z, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dZdxDrho : factor(diff(dZdx, rho, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dZdxDu : factor(diff(dZdx, u, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dZdxDp : factor(diff(dZdx, p, 1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dZdxDZ : factor(diff(dZdx, Z, 1));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

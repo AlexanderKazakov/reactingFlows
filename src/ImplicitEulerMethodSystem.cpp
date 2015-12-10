@@ -33,4 +33,3 @@ void ImplicitEulerMethodSystem::setPreviousValue(double* _previousValue) {
 void ImplicitEulerMethodSystem::printCompleteSolution(const double* u) const {
 	rightSideOfODE->printCompleteSolution(u);
 }
-

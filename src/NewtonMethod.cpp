@@ -4,8 +4,9 @@
 
 #include "src/util.hpp"
 
-void NewtonMethod::solve(const EquationSystem& system, double* solution) {
+bool NewtonMethod::solve(const EquationSystem& system, double* solution) {
 	int n = system.getSize();
+	bool converged = true;
 	previousDelta = new double[n];
 	for(int i = 0; i < n; i++) previousDelta[i] = 0;
 	A = gsl_matrix_alloc(n, n);
@@ -24,7 +25,7 @@ void NewtonMethod::solve(const EquationSystem& system, double* solution) {
 		residualErrorFile << system.residualError(solution) / initialResidualError << std::endl;
 	}
 	
-	const double epsilon = 1e-14 * system.residualError(solution);
+	const double epsilon = 1e-10 * system.residualError(solution);
 	int counter = 0;
 	while(system.residualError(solution) > epsilon) {
 		doIteration(system, solution);
@@ -34,15 +35,21 @@ void NewtonMethod::solve(const EquationSystem& system, double* solution) {
 			residualErrorFile << system.residualError(solution) / initialResidualError << std::endl;
 		}
 		counter++;
+		if (counter > 1000) {
+			converged = false;
+			break;
+		}
+
 	}
 	
-	std::cout << "The method converged in " << counter << " iterations\n";
+	if(converged) std::cout << "The method converged in " << counter << " iterations\n";
+	else std::cout << "The method isn't converged in " << counter << " iterations. Skipped.\n";
 	if(logging) residualErrorFile.close();
-	//delete [] previousDelta;
 	gsl_vector_free(x);
 	gsl_vector_free(b);
 	gsl_permutation_free(gslPermutation);
 	gsl_matrix_free(A);
+	return converged;
 }
 
 void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
@@ -60,7 +67,7 @@ void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
 	gsl_linalg_LU_solve(A, gslPermutation, b, x);
 	
 	for(int i = 0; i < n; i++) {
-		const double deltaU = gsl_vector_get(x, i) / 2; // when 4 test failed
+		const double deltaU = gsl_vector_get(x, i);
 		solution[i] += deltaU;
 		//previousDelta[i] = deltaU;
 	}

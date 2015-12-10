@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-#include <cmath>
+#include <math.h>
 
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_blas.h>

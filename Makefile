@@ -43,8 +43,14 @@ exec: $(EXECUTABLE) $(TEST)
 	gnuplot plotter
 	eog hugoniot.png
 
+exec2: $(EXECUTABLE) $(TEST)
+	./$(BUILDDIR)task1
+	gnuplot task2plotter
+	eog ZeldovichPRho.png
+
 clean:   
 	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS) \
 	residualError.txt HugoniotIsentropic.txt \ 
 	rm -f hugoniot.png residualError.png hugoniotDeflagration.png \
 	hugoniotDetonation.png
+	rm -f ZeldovichUZ.png ZeldovichPRho.png ZeldovichT.png Zeldovich.txt

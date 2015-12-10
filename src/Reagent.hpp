@@ -1,6 +1,7 @@
 #ifndef REAGENT_HPP
 #define	REAGENT_HPP
 
+#include <math.h>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -23,6 +24,13 @@ static const double Q_dimensionless = 1;
 static const double T_dimensionless = 1;
 static const double R_dimensionless = 1;
 #endif
+
+static const double E_dimensionless = R_dimensionless * T_dimensionless;
+static const double m_dimensionless = E_dimensionless / Q_dimensionless;
+static const double rho_dimensionless = p_dimensionless / Q_dimensionless;
+static const double u_dimensionless = sqrt(p_dimensionless / rho_dimensionless);
+static const double l_dimensionless = pow(m_dimensionless / rho_dimensionless, 1.0 / 3.0);
+static const double A_dimensionless = u_dimensionless / (rho_dimensionless * l_dimensionless);
 
 static const double R = 8.31 / R_dimensionless;
 

@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <math.h>
 
 #include "src/NewtonMethod.hpp"
 #include "test/LinearEquationSystem.hpp"
@@ -15,8 +16,16 @@ using namespace std;
  */
 int testTask2(int argc, char** argv) {
 	std::cout << "Testing ImplicitEulerMethod:" << std::endl;
-	ImplicitEulerMethod implicitEulerMethod(new TestODESystem(), 0.05, 1.0);
+	double T = 0.5;
+	TestODESystem* testODESystem = new TestODESystem();
+	ImplicitEulerMethod implicitEulerMethod(testODESystem, 0.00001, T);
 	implicitEulerMethod.calculate();
+	
+	double* analytical = new double [testODESystem->getSize()];
+	testODESystem->getAnalyticalSolution(analytical, T);
+	std::cout << "analytic: " << analytical[0] << ", " << analytical[1] << std::endl; 
+	
+	delete [] analytical;
 	return 0;
 }
 
@@ -53,6 +62,6 @@ int testTask1(int argc, char** argv) {
 
 
 int main(int argc, char** argv) {
-	testTask1(argc, argv);
+//	testTask1(argc, argv);
 	testTask2(argc, argv);
 }

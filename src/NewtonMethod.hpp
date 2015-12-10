@@ -16,8 +16,9 @@ public:
      * @param system system to solve
      * @param solution pointer to array of doubles of size == size of the system
 	 * to place the solution in
+	 * @return is method converged in 1000 iterations
      */
-	void solve(const EquationSystem& system, double* solution);
+	bool solve(const EquationSystem& system, double* solution);
 private:
 	/* Jacobian of the system */
 	gsl_matrix *A;

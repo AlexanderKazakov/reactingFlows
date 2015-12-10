@@ -16,7 +16,7 @@ public:
 	                             const double* u) const override;
 	virtual void getFirstApproximation(double* u) const override;
 	virtual void printCompleteSolution(const double* u) const override;
-	
+
 	void setPreviousValue(double* _previousValue);
 	
 

@@ -1,6 +1,6 @@
 #include "src/EquationSystem.hpp"
 
-#include <cmath>
+#include <math.h>
 
 EquationSystem::EquationSystem(const int size) : size(size) 
 {
