@@ -7,11 +7,11 @@ ZeldovichSystem::ZeldovichSystem() : EquationSystem(4) {
 }
 
 ZeldovichSystem::~ZeldovichSystem() {
-	std::cout << "rho_dimensionless = " << rho_dimensionless << std::endl;
-	std::cout << "u_dimensionless = " << u_dimensionless << std::endl;
-	std::cout << "p_dimensionless = " << p_dimensionless << std::endl;
-	std::cout << "l_dimensionless = " << l_dimensionless << std::endl;
-	std::cout << "T_dimensionless = " << T_dimensionless << std::endl;
+//	std::cout << "rho_dimensionless = " << rho_dimensionless << std::endl;
+//	std::cout << "u_dimensionless = " << u_dimensionless << std::endl;
+//	std::cout << "p_dimensionless = " << p_dimensionless << std::endl;
+//	std::cout << "l_dimensionless = " << l_dimensionless << std::endl;
+//	std::cout << "T_dimensionless = " << T_dimensionless << std::endl;
 }
 
 double ZeldovichSystem::getValue(const int i, const double* f) const {

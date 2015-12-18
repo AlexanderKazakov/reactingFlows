@@ -18,6 +18,7 @@ public:
 	virtual void printCompleteSolution(const double* u) const override;
 
 	void setPreviousValue(double* _previousValue);
+	void getPreviousValue(double* _previousValue);
 	
 
 private:

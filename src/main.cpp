@@ -69,7 +69,7 @@ int task1(int argc, char** argv) {
 /** Task 2 - ODE etc */
 int task2(int argc, char** argv) {
 	ZeldovichSystem zeldovichSystem;
-	ImplicitEulerMethod implicitEulerMethod(&zeldovichSystem, 0.000001, 1.0);
+	ImplicitEulerMethod implicitEulerMethod(&zeldovichSystem, 5e-8, 1.0);
 	implicitEulerMethod.calculate();
 	return 0;
 }

@@ -30,6 +30,11 @@ void ImplicitEulerMethodSystem::setPreviousValue(double* _previousValue) {
 		previousValue[i] = _previousValue[i];
 }
 
+void ImplicitEulerMethodSystem::getPreviousValue(double* _previousValue) {
+	for(int i = 0; i < getSize(); i++)
+		_previousValue[i] = previousValue[i];
+}
+
 void ImplicitEulerMethodSystem::printCompleteSolution(const double* u) const {
 	rightSideOfODE->printCompleteSolution(u);
 }
