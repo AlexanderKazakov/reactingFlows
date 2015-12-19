@@ -7,14 +7,18 @@
  * A system of non-linear equations that appears on every step of
  * Implicit Euler method for ODE solving
  */
+template<class RightSideOfODE>
 class ImplicitEulerMethodSystem : public EquationSystem {
 public:
-	ImplicitEulerMethodSystem(EquationSystem* rightSideOfODE, double tau);
+	ImplicitEulerMethodSystem();
+	void setTau(double _tau);
+	int getSize() const;
 
 	double getValue(const int i, const double* u) const;
 	double getDerivative(const int i, const int j, const double* u) const;
 	void getFirstApproximation(double* u) const;
 	void printCompleteSolution(const double* u) const;
+	double residualError(const double* u) const;
 
 	void setPreviousValue(double* _previousValue);
 	void getPreviousValue(double* _previousValue);
@@ -26,7 +30,7 @@ private:
 	 * d\vec{y} / dt = \vec{f}(t, \vec{y})
 	 * This system represents the function \vec{f}(t, \vec{y})
 	 */
-	EquationSystem* rightSideOfODE;
+	RightSideOfODE rightSideOfODE;
 	double* previousValue;
 	double tau = 0;
 };

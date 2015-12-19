@@ -1,7 +1,8 @@
 #include "test/LinearEquationSystem.hpp"
 
+#include <math.h>
+
 LinearEquationSystem::LinearEquationSystem() : EquationSystem(LES_SIZE) {
-	implementation = LINEAR_EQUATION;
 }
 
 double LinearEquationSystem::getValue(const int i, const double* u) const {
@@ -21,3 +22,12 @@ void LinearEquationSystem::getFirstApproximation(double* u) const {
 		u[i] = b[i];
 }
 
+
+double LinearEquationSystem::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
+}

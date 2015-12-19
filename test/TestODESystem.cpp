@@ -5,7 +5,6 @@
 
 
 TestODESystem::TestODESystem() : EquationSystem(2) {
-	implementation = TEST_ODE;
 	
 	a = -10;
 	b = -1;
@@ -40,4 +39,14 @@ void TestODESystem::printCompleteSolution(const double* u) const {
 void TestODESystem::getAnalyticalSolution(double* analytSol, const double t) const {
 	analytSol[0] = exp(a * t) - exp(b * t);
 	analytSol[1] = exp(a * t) + exp(b * t);
+}
+
+
+double TestODESystem::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
 }

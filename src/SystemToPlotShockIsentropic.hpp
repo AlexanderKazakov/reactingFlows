@@ -16,13 +16,15 @@
  */
 class SystemToPlotShockIsentropic : public EquationSystem {
 public:
-	SystemToPlotShockIsentropic(const double& givenEta);
+	SystemToPlotShockIsentropic();
+	void setGivenEta(const double& _givenEta);
 
 	double getValue(const int i, const double* u) const;
 	double getDerivative(const int i, const int j, const double* u) const;
 	void getFirstApproximation(double* u) const;
 	void printCompleteSolution(const double* u) const;
-
+	double residualError(const double* u) const;
+	
 private:
 #if CONST_GAMMA
 	/* The mixture of sources of reaction */

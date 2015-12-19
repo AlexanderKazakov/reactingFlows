@@ -19,7 +19,8 @@ public:
 	double getDerivative(const int i, const int j, const double* f) const;
 	void getFirstApproximation(double* f) const;
 	void printCompleteSolution(const double* f) const;
-
+	double residualError(const double* u) const;
+	
 private:
 	const double A = 1.64e+9 / A_dimensionless;
 	const double Ea = 167e+3 / E_dimensionless;

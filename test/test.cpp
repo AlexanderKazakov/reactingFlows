@@ -17,10 +17,11 @@ using namespace std;
 int testTask2(int argc, char** argv) {
 	std::cout << "Testing ImplicitEulerMethod:" << std::endl;
 	double T = 0.5;
-	TestODESystem* testODESystem = new TestODESystem();
-	ImplicitEulerMethod implicitEulerMethod(testODESystem, 0.00001, T);
+	ImplicitEulerMethod<TestODESystem> implicitEulerMethod;
+	implicitEulerMethod.setTauAndT(0.00001, T);
 	implicitEulerMethod.calculate();
-	
+
+	TestODESystem* testODESystem = new TestODESystem();	
 	double* analytical = new double [testODESystem->getSize()];
 	testODESystem->getAnalyticalSolution(analytical, T);
 	std::cout << "analytic: " << analytical[0] << ", " << analytical[1] << std::endl; 
@@ -34,13 +35,11 @@ int testTask2(int argc, char** argv) {
  * Test for NewtonMethod
  */
 int testTask1(int argc, char** argv) {
-	NewtonMethod newtonMethod;
-//	newtonMethod.logging = true;
-	
+	NewtonMethod<LinearEquationSystem> newtonMethod;
 	std::cout << "Testing on system of linear equations: \n";
 	LinearEquationSystem linearEquationSystem;
 	double* solution = new double[linearEquationSystem.getSize()];
-	newtonMethod.solve(linearEquationSystem, solution);
+	newtonMethod.solve(solution);
 	std::cout << "Find root: ";
 	for(int i = 0; i < linearEquationSystem.getSize(); i++)
 		std::cout << solution[i] << "\t";
@@ -49,7 +48,8 @@ int testTask1(int argc, char** argv) {
 	std::cout << "Testing on non-linear system: \n";
 	NonLinearEquationSystem nonLinearEquationSystem;
 	double* solution2 = new double[nonLinearEquationSystem.getSize()];
-	newtonMethod.solve(nonLinearEquationSystem, solution2);
+	NewtonMethod<NonLinearEquationSystem> newtonMethod2;
+	newtonMethod2.solve(solution2);
 	std::cout << "Find root: ";
 	for(int i = 0; i < nonLinearEquationSystem.getSize(); i++)
 		std::cout << solution2[i] << "\t";

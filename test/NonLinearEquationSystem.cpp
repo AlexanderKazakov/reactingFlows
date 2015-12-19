@@ -1,7 +1,8 @@
 #include "test/NonLinearEquationSystem.hpp"
 
+#include <math.h>
+
 NonLinearEquationSystem::NonLinearEquationSystem() : EquationSystem(2) {
-	implementation = NON_LINEAR_EQUATION;
 }
 
 double NonLinearEquationSystem::getValue(const int i, const double* u) const {
@@ -42,3 +43,12 @@ void NonLinearEquationSystem::getFirstApproximation(double* u) const {
 	u[0] = 3; u[1] = 5;
 }
 
+
+double NonLinearEquationSystem::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
+}

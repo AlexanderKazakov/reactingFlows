@@ -1,0 +1,339 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 71.40    163.54   163.54 2400000240     0.00     0.00  ZeldovichSystem::getValue(int, double const*) const
+  7.73    181.25    17.71 600000060     0.00     0.00  ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const
+  7.40    198.20    16.96 2400000240     0.00     0.00  ImplicitEulerMethodSystem<ZeldovichSystem>::getValue(int, double const*) const
+  2.55    204.04     5.84 5400000660     0.00     0.00  ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const
+  1.79    208.14     4.10 200000020     0.00     0.00  ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*)
+  1.74    212.13     3.99 200000020     0.00     0.00  ImplicitEulerMethod<ZeldovichSystem>::nextStep()
+  1.74    216.11     3.98 5400000700     0.00     0.00  EquationSystem::getSize() const
+  1.62    219.81     3.70 200000020     0.00     0.00  NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*)
+  1.07    222.26     2.45 200000040     0.00     0.00  ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const
+  1.00    224.54     2.28       20     0.11     0.11  ImplicitEulerMethodSystem<ZeldovichSystem>::setTau(double)
+  0.88    226.55     2.01       20     0.10    11.21  ImplicitEulerMethod<ZeldovichSystem>::calculate()
+  0.48    227.64     1.09       80     0.01     0.01  EquationSystem::EquationSystem(int)
+  0.41    228.57     0.93       40     0.02     0.02  ZeldovichSystem::~ZeldovichSystem()
+  0.13    228.87     0.30                             ImplicitEulerMethodSystem<ZeldovichSystem>::printCompleteSolution(double const*) const
+  0.04    228.97     0.10                             ImplicitEulerMethod<ZeldovichSystem>::printSolutionToFile(double, double*)
+  0.03    229.04     0.07                             NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::doIteration(double*)
+  0.02    229.08     0.05                             ImplicitEulerMethodSystem<ZeldovichSystem>::getDerivative(int, int, double const*) const
+  0.00    229.08     0.00       40     0.00     0.01  ZeldovichSystem::ZeldovichSystem()
+  0.00    229.08     0.00       40     0.00     0.03  ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem()
+  0.00    229.08     0.00       40     0.00     0.00  ZeldovichSystem::getFirstApproximation(double*) const
+  0.00    229.08     0.00       20     0.00     0.00  NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::NewtonMethod()
+  0.00    229.08     0.00       20     0.00     0.00  ImplicitEulerMethod<ZeldovichSystem>::setTauAndT(double, double)
+  0.00    229.08     0.00       20     0.00     0.05  ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod()
+  0.00    229.08     0.00       20     0.00     0.02  ImplicitEulerMethod<ZeldovichSystem>::~ImplicitEulerMethod()
+  0.00    229.08     0.00        3     0.00     0.00  _GLOBAL__sub_I__ZN27SystemToPlotShockIsentropicC2Ev
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z27printFileForIsentropicsPlotRKd
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z4infov
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN12ConstMixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN13TestODESystemC2Ev
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN15ZeldovichSystemC2Ev
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN19GasDetonationSystemC2Ev
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN30SystemToPlotHugoniotIsentropicC2Ev
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN7Mixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE
+  0.00    229.08     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN7ReagentC2ESs
+  0.00    229.08     0.00        1     0.00     0.00  _init
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.00% of 229.08 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     99.8    0.00  228.57                 task2(int, char**) [1]
+                2.01  222.26      20/20          ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+                2.28    0.00      20/20          ImplicitEulerMethodSystem<ZeldovichSystem>::setTau(double) [12]
+                0.00    1.09      20/20          ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod() [14]
+                0.47    0.00      20/40          ZeldovichSystem::~ZeldovichSystem() [16]
+                0.00    0.47      20/20          ImplicitEulerMethod<ZeldovichSystem>::~ImplicitEulerMethod() [18]
+                0.00    0.00      20/20          ImplicitEulerMethod<ZeldovichSystem>::setTauAndT(double, double) [32]
+-----------------------------------------------
+                2.01  222.26      20/20          task2(int, char**) [1]
+[2]     97.9    2.01  222.26      20         ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+                3.99  218.27 200000020/200000020     ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+                0.00    0.00      20/200000040     ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const [10]
+                0.00    0.00      20/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                0.00    0.00      20/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+                3.99  218.27 200000020/200000020     ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+[3]     97.0    3.99  218.27 200000020         ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+                3.70  208.29 200000020/200000020     NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+                4.10    1.82 200000020/200000020     ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*) [8]
+                0.22    0.00 200000020/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                0.15    0.00 200000020/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+                3.70  208.29 200000020/200000020     ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+[4]     92.5    3.70  208.29 200000020         NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+               17.71  185.95 600000060/600000060     ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const [5]
+                2.45    1.82 200000020/200000040     ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const [10]
+                0.22    0.00 200000020/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                0.15    0.00 200000020/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+               17.71  185.95 600000060/600000060     NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+[5]     88.9   17.71  185.95 600000060         ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const [5]
+               16.96  163.54 2400000240/2400000240     ImplicitEulerMethodSystem<ZeldovichSystem>::getValue(int, double const*) const [6]
+                3.24    0.00 3000000300/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                2.21    0.00 3000000300/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+               16.96  163.54 2400000240/2400000240     ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const [5]
+[6]     78.8   16.96  163.54 2400000240         ImplicitEulerMethodSystem<ZeldovichSystem>::getValue(int, double const*) const [6]
+              163.54    0.00 2400000240/2400000240     ZeldovichSystem::getValue(int, double const*) const [7]
+-----------------------------------------------
+              163.54    0.00 2400000240/2400000240     ImplicitEulerMethodSystem<ZeldovichSystem>::getValue(int, double const*) const [6]
+[7]     71.4  163.54    0.00 2400000240         ZeldovichSystem::getValue(int, double const*) const [7]
+-----------------------------------------------
+                4.10    1.82 200000020/200000020     ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+[8]      2.6    4.10    1.82 200000020         ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*) [8]
+                1.08    0.00 1000000100/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                0.74    0.00 1000000100/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+                0.00    0.00      20/5400000660     ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+                0.22    0.00 200000020/5400000660     NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+                0.22    0.00 200000020/5400000660     ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+                1.08    0.00 1000000100/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*) [8]
+                1.08    0.00 1000000200/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const [10]
+                3.24    0.00 3000000300/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const [5]
+[9]      2.5    5.84    0.00 5400000660         ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+-----------------------------------------------
+                0.00    0.00      20/200000040     ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+                2.45    1.82 200000020/200000040     NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+[10]     1.9    2.45    1.82 200000040         ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const [10]
+                1.08    0.00 1000000200/5400000660     ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const [9]
+                0.74    0.00 1000000200/5400000700     EquationSystem::getSize() const [11]
+-----------------------------------------------
+                0.00    0.00      20/5400000700     ImplicitEulerMethod<ZeldovichSystem>::calculate() [2]
+                0.00    0.00      40/5400000700     ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+                0.15    0.00 200000020/5400000700     NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [4]
+                0.15    0.00 200000020/5400000700     ImplicitEulerMethod<ZeldovichSystem>::nextStep() [3]
+                0.74    0.00 1000000100/5400000700     ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*) [8]
+                0.74    0.00 1000000200/5400000700     ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const [10]
+                2.21    0.00 3000000300/5400000700     ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const [5]
+[11]     1.7    3.98    0.00 5400000700         EquationSystem::getSize() const [11]
+-----------------------------------------------
+                2.28    0.00      20/20          task2(int, char**) [1]
+[12]     1.0    2.28    0.00      20         ImplicitEulerMethodSystem<ZeldovichSystem>::setTau(double) [12]
+-----------------------------------------------
+                0.00    1.09      40/40          ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod() [14]
+[13]     0.5    0.00    1.09      40         ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+                0.55    0.00      40/80          EquationSystem::EquationSystem(int) [15]
+                0.00    0.55      40/40          ZeldovichSystem::ZeldovichSystem() [17]
+                0.00    0.00      40/5400000700     EquationSystem::getSize() const [11]
+                0.00    0.00      40/40          ZeldovichSystem::getFirstApproximation(double*) const [30]
+-----------------------------------------------
+                0.00    1.09      20/20          task2(int, char**) [1]
+[14]     0.5    0.00    1.09      20         ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod() [14]
+                0.00    1.09      40/40          ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+                0.00    0.00      20/20          NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::NewtonMethod() [31]
+-----------------------------------------------
+                0.55    0.00      40/80          ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+                0.55    0.00      40/80          ZeldovichSystem::ZeldovichSystem() [17]
+[15]     0.5    1.09    0.00      80         EquationSystem::EquationSystem(int) [15]
+-----------------------------------------------
+                0.47    0.00      20/40          ImplicitEulerMethod<ZeldovichSystem>::~ImplicitEulerMethod() [18]
+                0.47    0.00      20/40          task2(int, char**) [1]
+[16]     0.4    0.93    0.00      40         ZeldovichSystem::~ZeldovichSystem() [16]
+-----------------------------------------------
+                0.00    0.55      40/40          ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+[17]     0.2    0.00    0.55      40         ZeldovichSystem::ZeldovichSystem() [17]
+                0.55    0.00      40/80          EquationSystem::EquationSystem(int) [15]
+-----------------------------------------------
+                0.00    0.47      20/20          task2(int, char**) [1]
+[18]     0.2    0.00    0.47      20         ImplicitEulerMethod<ZeldovichSystem>::~ImplicitEulerMethod() [18]
+                0.47    0.00      20/40          ZeldovichSystem::~ZeldovichSystem() [16]
+-----------------------------------------------
+                                                 <spontaneous>
+[19]     0.1    0.30    0.00                 ImplicitEulerMethodSystem<ZeldovichSystem>::printCompleteSolution(double const*) const [19]
+-----------------------------------------------
+                                                 <spontaneous>
+[20]     0.0    0.10    0.00                 ImplicitEulerMethod<ZeldovichSystem>::printSolutionToFile(double, double*) [20]
+-----------------------------------------------
+                                                 <spontaneous>
+[21]     0.0    0.07    0.00                 NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::doIteration(double*) [21]
+-----------------------------------------------
+                                                 <spontaneous>
+[22]     0.0    0.05    0.00                 ImplicitEulerMethodSystem<ZeldovichSystem>::getDerivative(int, int, double const*) const [22]
+-----------------------------------------------
+                0.00    0.00      40/40          ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem() [13]
+[30]     0.0    0.00    0.00      40         ZeldovichSystem::getFirstApproximation(double*) const [30]
+-----------------------------------------------
+                0.00    0.00      20/20          ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod() [14]
+[31]     0.0    0.00    0.00      20         NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::NewtonMethod() [31]
+-----------------------------------------------
+                0.00    0.00      20/20          task2(int, char**) [1]
+[32]     0.0    0.00    0.00      20         ImplicitEulerMethod<ZeldovichSystem>::setTauAndT(double, double) [32]
+-----------------------------------------------
+                0.00    0.00       3/3           __libc_csu_init [150]
+[33]     0.0    0.00    0.00       3         _GLOBAL__sub_I__ZN27SystemToPlotShockIsentropicC2Ev [33]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[34]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z27printFileForIsentropicsPlotRKd [34]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[35]     0.0    0.00    0.00       1         _GLOBAL__sub_I__Z4infov [35]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[36]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN12ConstMixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE [36]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[37]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN13TestODESystemC2Ev [37]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[38]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN15ZeldovichSystemC2Ev [38]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[39]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN19GasDetonationSystemC2Ev [39]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[40]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN30SystemToPlotHugoniotIsentropicC2Ev [40]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[41]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN7Mixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE [41]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[42]     0.0    0.00    0.00       1         _GLOBAL__sub_I__ZN7ReagentC2ESs [42]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [150]
+[43]     0.0    0.00    0.00       1         _init [43]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [34] _GLOBAL__sub_I__Z27printFileForIsentropicsPlotRKd [31] NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::NewtonMethod() [13] ImplicitEulerMethodSystem<ZeldovichSystem>::ImplicitEulerMethodSystem()
+  [35] _GLOBAL__sub_I__Z4infov [15] EquationSystem::EquationSystem(int) [11] EquationSystem::getSize() const
+  [36] _GLOBAL__sub_I__ZN12ConstMixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE [17] ZeldovichSystem::ZeldovichSystem() [30] ZeldovichSystem::getFirstApproximation(double*) const
+  [37] _GLOBAL__sub_I__ZN13TestODESystemC2Ev [16] ZeldovichSystem::~ZeldovichSystem() [7] ZeldovichSystem::getValue(int, double const*) const
+  [38] _GLOBAL__sub_I__ZN15ZeldovichSystemC2Ev [32] ImplicitEulerMethod<ZeldovichSystem>::setTauAndT(double, double) [22] ImplicitEulerMethodSystem<ZeldovichSystem>::getDerivative(int, int, double const*) const
+  [39] _GLOBAL__sub_I__ZN19GasDetonationSystemC2Ev [20] ImplicitEulerMethod<ZeldovichSystem>::printSolutionToFile(double, double*) [5] ImplicitEulerMethodSystem<ZeldovichSystem>::residualError(double const*) const
+  [33] _GLOBAL__sub_I__ZN27SystemToPlotShockIsentropicC2Ev [3] ImplicitEulerMethod<ZeldovichSystem>::nextStep() [10] ImplicitEulerMethodSystem<ZeldovichSystem>::getFirstApproximation(double*) const
+  [40] _GLOBAL__sub_I__ZN30SystemToPlotHugoniotIsentropicC2Ev [2] ImplicitEulerMethod<ZeldovichSystem>::calculate() [19] ImplicitEulerMethodSystem<ZeldovichSystem>::printCompleteSolution(double const*) const
+  [41] _GLOBAL__sub_I__ZN7Mixture11setReagentsESt6vectorISt4pairISsdESaIS2_EE [14] ImplicitEulerMethod<ZeldovichSystem>::ImplicitEulerMethod() [9] ImplicitEulerMethodSystem<ZeldovichSystem>::getSize() const
+  [42] _GLOBAL__sub_I__ZN7ReagentC2ESs [18] ImplicitEulerMethod<ZeldovichSystem>::~ImplicitEulerMethod() [6] ImplicitEulerMethodSystem<ZeldovichSystem>::getValue(int, double const*) const
+  [21] NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::doIteration(double*) [8] ImplicitEulerMethodSystem<ZeldovichSystem>::setPreviousValue(double*) [43] _init
+   [4] NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem> >::solve(double*) [12] ImplicitEulerMethodSystem<ZeldovichSystem>::setTau(double)

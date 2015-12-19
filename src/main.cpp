@@ -22,6 +22,8 @@ using namespace std;
 /**
  * Write file for plot of Hugoniot isentropic
  * @param eta0 eta to plot around
+ * @warning this function is broken due to templates refactoring - 
+ * givenEta isn't set to the systems
  */
 void printFileForIsentropicsPlot(const double& eta0) {
 	
@@ -31,15 +33,15 @@ void printFileForIsentropicsPlot(const double& eta0) {
 	for(double eta = 0.15; eta < 20; eta += 0.01) {
 		file << eta << "\t";
 		
-		SystemToPlotHugoniotIsentropic hugoniot(eta);
-		SystemToPlotShockIsentropic shock(eta);
-		NewtonMethod method;
+		SystemToPlotHugoniotIsentropic hugoniot;
+		SystemToPlotShockIsentropic shock;
+		NewtonMethod<SystemToPlotHugoniotIsentropic> method;
 		double* solution = new double[hugoniot.getSize()];
-		NewtonMethod newtonMethod;
-		newtonMethod.solve(hugoniot, solution);
+		method.solve(solution);
 		const double p = solution[0] * p_dimensionless;
 		file << p << "\t";
-		newtonMethod.solve(shock, solution);
+		NewtonMethod<SystemToPlotShockIsentropic> newtonMethod;
+		newtonMethod.solve(solution);
 		const double p2 = solution[0] * p_dimensionless;
 		file << p2 << "\t" << solution[1] << "\t" << solution[2]*T_dimensionless << "\n";
 
@@ -54,9 +56,9 @@ int task1(int argc, char** argv) {
 	
 	GasDetonationSystem gasDetonationSystem;
 	double* solution = new double[gasDetonationSystem.getSize()];
-	NewtonMethod newtonMethod;
+	NewtonMethod<GasDetonationSystem> newtonMethod;
 	newtonMethod.logging = true;
-	newtonMethod.solve(gasDetonationSystem, solution);
+	newtonMethod.solve(solution);
 	
 	gasDetonationSystem.printCompleteSolution(solution);
 	const double eta = solution[1];
@@ -64,15 +66,15 @@ int task1(int argc, char** argv) {
 	delete [] solution;
 	
 #if PLOT_ISENTROPICS
-	printFileForIsentropicsPlot(eta);
+//	printFileForIsentropicsPlot(eta);
 #endif	
 	return 0;
 }
 
 /** Task 2 - ODE etc */
 int task2(int argc, char** argv) {
-	ZeldovichSystem zeldovichSystem;
-	ImplicitEulerMethod implicitEulerMethod(&zeldovichSystem, 1e-7, 1.0);
+	ImplicitEulerMethod<ZeldovichSystem> implicitEulerMethod;
+	implicitEulerMethod.setTauAndT(1e-7, 1.0);
 	implicitEulerMethod.calculate();
 	return 0;
 }

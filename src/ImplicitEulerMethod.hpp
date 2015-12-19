@@ -7,15 +7,17 @@
 #include "src/NewtonMethod.hpp"
 
 
+template<class RightSideOfODE>
 class ImplicitEulerMethod {
 public:
-	ImplicitEulerMethod(EquationSystem* rightSideOfODE, double tau, double T);
+	ImplicitEulerMethod();
+	void setTauAndT(double _tau, double _T);
 	~ImplicitEulerMethod();
 	void calculate();
 	
 private:
-	NewtonMethod theNewtonMethod;
-	ImplicitEulerMethodSystem implicitEulerMethodSystem;
+	NewtonMethod<ImplicitEulerMethodSystem<RightSideOfODE>> theNewtonMethod;
+	ImplicitEulerMethodSystem<RightSideOfODE> implicitEulerMethodSystem;
 	double tau = 0; // time step
 	double t = 0; // current time
 	double T = 0; // required time

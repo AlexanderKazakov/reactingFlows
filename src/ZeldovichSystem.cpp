@@ -4,7 +4,6 @@
 
 
 ZeldovichSystem::ZeldovichSystem() : EquationSystem(4) {
-	implementation = ZELDOVICH;
 }
 
 ZeldovichSystem::~ZeldovichSystem() {
@@ -160,3 +159,12 @@ void ZeldovichSystem::printCompleteSolution(const double* f) const {
 		<< " Z = " << Z << " T = " << T << " u / c = " << u / c << std::endl;
 }
 
+
+double ZeldovichSystem::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
+}

@@ -13,6 +13,7 @@ public:
 	                             const double* u) const;
 	void getFirstApproximation(double* u) const;
 	void printCompleteSolution(const double* u) const {};
+	double residualError(const double* u) const;
 
 private:
 	const double A[LES_SIZE][LES_SIZE] = {{ 6, 5, 1 },

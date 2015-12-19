@@ -14,6 +14,7 @@ public:
 	void printCompleteSolution(const double* u) const;
 	
 	void getAnalyticalSolution(double* analytSol, const double t) const;
+	double residualError(const double* u) const;
 
 private:
 	

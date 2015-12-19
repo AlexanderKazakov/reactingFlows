@@ -3,8 +3,20 @@
 #include <fstream>
 
 #include "src/util.hpp"
+#include "src/GasDetonationSystem.hpp"
+#include "src/SystemToPlotHugoniotIsentropic.hpp"
+#include "src/SystemToPlotShockIsentropic.hpp"
+#include "src/ImplicitEulerMethodSystem.hpp"
+#include "test/LinearEquationSystem.hpp"
+#include "test/NonLinearEquationSystem.hpp"
+#include "src/ZeldovichSystem.hpp"
+#include "test/TestODESystem.hpp"
 
-bool NewtonMethod::solve(const EquationSystem& system, double* solution) {
+template<class System>
+NewtonMethod<System>::NewtonMethod() {}
+
+template<class System>
+bool NewtonMethod<System>::solve(double* solution) {
 	int n = system.getSize();
 	bool converged = true;
 	A = gsl_matrix_alloc(n, n);
@@ -26,7 +38,7 @@ bool NewtonMethod::solve(const EquationSystem& system, double* solution) {
 	const double epsilon = 1e-10 * system.residualError(solution);
 	int counter = 0;
 	while(system.residualError(solution) > epsilon) {
-		doIteration(system, solution);
+		doIteration(solution);
 //		if(logging) {
 //			std::cout << "NewtonMethod: Residual error after next iteration: " <<
 //				system.residualError(solution) << std::endl;
@@ -50,7 +62,8 @@ bool NewtonMethod::solve(const EquationSystem& system, double* solution) {
 	return converged;
 }
 
-void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
+template<class System>
+void NewtonMethod<System>::doIteration(double* solution) {
 	int n = system.getSize();
 	for(int i = 0; i < n; i++)
 		gsl_vector_set(b, i, - system.getValue(i, solution));
@@ -70,3 +83,11 @@ void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
 	}
 }
 
+
+template class NewtonMethod<GasDetonationSystem>;
+template class NewtonMethod<SystemToPlotHugoniotIsentropic>;
+template class NewtonMethod<SystemToPlotShockIsentropic>;
+template class NewtonMethod<LinearEquationSystem>;
+template class NewtonMethod<NonLinearEquationSystem>;
+template class NewtonMethod<ImplicitEulerMethodSystem<ZeldovichSystem>>;
+template class NewtonMethod<ImplicitEulerMethodSystem<TestODESystem>>;

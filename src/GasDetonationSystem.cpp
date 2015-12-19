@@ -5,8 +5,6 @@
 
 GasDetonationSystem::GasDetonationSystem() : EquationSystem(3) {
 	
-	implementation = GAS_DETONATION;
-	
 	before.setReagents({std::make_pair("C2H2", 0.0705),
 	                    std::make_pair("O2",   0.2168),
 	                    std::make_pair("N2",   0.7127)});
@@ -132,3 +130,11 @@ void GasDetonationSystem::printCompleteSolution(const double* u) const {
 
 }
 
+double GasDetonationSystem::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
+}

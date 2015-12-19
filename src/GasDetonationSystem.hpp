@@ -22,6 +22,7 @@ public:
 	double getDerivative(const int i, const int j, const double* u) const;
 	void getFirstApproximation(double* u) const;
 	void printCompleteSolution(const double* u) const;
+	double residualError(const double* u) const;
 
 
 private:

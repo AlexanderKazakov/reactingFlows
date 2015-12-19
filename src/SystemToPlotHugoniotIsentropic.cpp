@@ -2,11 +2,8 @@
 
 #include "src/SystemToPlotHugoniotIsentropic.hpp"
 
-
-SystemToPlotHugoniotIsentropic::SystemToPlotHugoniotIsentropic
-	(const double& givenEta) : EquationSystem(3), givenEta(givenEta) {
-	
-	implementation = PLOT_HUGONIOT_ISENTROPIC;
+SystemToPlotHugoniotIsentropic::SystemToPlotHugoniotIsentropic() :
+		EquationSystem(3) {
 	
 	before.setReagents({std::make_pair("C2H2", 0.0705),
 	                    std::make_pair("O2",   0.2168),
@@ -20,6 +17,10 @@ SystemToPlotHugoniotIsentropic::SystemToPlotHugoniotIsentropic
 	p0 = 1e+5 / p_dimensionless;
 	T0 = 298 / T_dimensionless;
 	eta0 = R * T0 * before.getMeanInverseMolarMass() / p0;
+}
+
+void SystemToPlotHugoniotIsentropic::setGivenEta(const double& _givenEta) {
+	givenEta = _givenEta;
 }
 
 double SystemToPlotHugoniotIsentropic::getValue(const int i, const double* u) const {
@@ -125,3 +126,12 @@ void SystemToPlotHugoniotIsentropic::printCompleteSolution(const double* u) cons
 
 }
 
+
+double SystemToPlotHugoniotIsentropic::residualError(const double* u) const {
+	double ans = 0;
+	for(int i = 0; i < getSize(); i++) {
+		double error = getValue(i, u);
+		ans += error*error;
+	}
+	return sqrt(ans);
+}

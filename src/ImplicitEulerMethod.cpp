@@ -1,20 +1,29 @@
 #include <math.h>
 
 #include "src/ImplicitEulerMethod.hpp"
+#include "src/ZeldovichSystem.hpp"
+#include "test/TestODESystem.hpp"
 
-ImplicitEulerMethod::ImplicitEulerMethod(EquationSystem* rightSideOfODE,
-                                         double tau, double T) :
-		implicitEulerMethodSystem(rightSideOfODE, tau), tau(tau), T(T) {	
-	
+template<class RightSideOfODE>
+ImplicitEulerMethod<RightSideOfODE>::ImplicitEulerMethod() {
 	theNewtonMethod.logging = false;
-//	resultFile.open("Zeldovich.txt", std::ios::out);
 }
 
-ImplicitEulerMethod::~ImplicitEulerMethod() {
+template<class RightSideOfODE>
+void ImplicitEulerMethod<RightSideOfODE>::setTauAndT(double _tau, double _T) {	
+		
+	tau = _tau;
+	T = _T;
+	implicitEulerMethodSystem.setTau(_tau);
+}
+
+template<class RightSideOfODE>
+ImplicitEulerMethod<RightSideOfODE>::~ImplicitEulerMethod() {
 //	resultFile.close();
 }
 
-void ImplicitEulerMethod::calculate() {
+template<class RightSideOfODE>
+void ImplicitEulerMethod<RightSideOfODE>::calculate() {
 	double* initial = new double [implicitEulerMethodSystem.getSize()];
 	implicitEulerMethodSystem.getFirstApproximation(initial);
 //	implicitEulerMethodSystem.printCompleteSolution(initial);
@@ -24,9 +33,10 @@ void ImplicitEulerMethod::calculate() {
 	delete [] initial;
 }
 
-bool ImplicitEulerMethod::nextStep() {
+template<class RightSideOfODE>
+bool ImplicitEulerMethod<RightSideOfODE>::nextStep() {
 	double* solution = new double[implicitEulerMethodSystem.getSize()];
-	if( !theNewtonMethod.solve(implicitEulerMethodSystem, solution) ) {
+	if( !theNewtonMethod.solve(solution) ) {
 		implicitEulerMethodSystem.getPreviousValue(solution);
 		if (fabs(solution[0] - 1.98) > 0.1) throw "rho invalid";
 		if (fabs(solution[1] - 1.02) > 0.1) throw "u invalid";
@@ -43,10 +53,14 @@ bool ImplicitEulerMethod::nextStep() {
 	return true;
 }
 
-void ImplicitEulerMethod::printSolutionToFile(double t, double* solution) {
+template<class RightSideOfODE>
+void ImplicitEulerMethod<RightSideOfODE>::printSolutionToFile(double t, double* solution) {
 //	resultFile << t << '\t';
 //	for(int i = 0; i < implicitEulerMethodSystem.getSize(); i++) {
 //		resultFile << solution[i] << '\t';
 //	}
 //	resultFile << std::endl;
 }
+
+template class ImplicitEulerMethod<ZeldovichSystem>;
+template class ImplicitEulerMethod<TestODESystem>;
