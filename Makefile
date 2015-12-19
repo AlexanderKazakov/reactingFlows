@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-std=c++11 -c -iquote. -O3 -pg # -g -O0
-LFLAGS=-lgsl -lgslcblas -O3 -pg # -g -O0
+CFLAGS=-std=c++11 -c -iquote. -O3 #-pg # -g -O0
+LFLAGS=-lgsl -lgslcblas -O3 #-pg # -g -O0
 SRCDIR=src/
 TESTDIR=test/
 BUILDDIR=build/

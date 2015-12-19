@@ -1,5 +1,8 @@
 #include <cstdlib>
 #include <fstream>
+#include <chrono>
+#include <numeric>
+#include <math.h>
 
 #include "src/NewtonMethod.hpp"
 #include "src/GasDetonationSystem.hpp"
@@ -74,11 +77,26 @@ int task2(int argc, char** argv) {
 	return 0;
 }
 
+#define MEASURES_NUMBER 20
 int main(int argc, char** argv) {
 	try {
-		return task2(argc, argv);
+		std::vector<double> durations;
+		for (int i = 0; i < MEASURES_NUMBER; i++) {
+			std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+			task2(argc, argv);
+			std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+			double duration = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+			durations.push_back(duration);
+		}
+		double sum = std::accumulate(durations.begin(), durations.end(), 0.0);
+		double mean = sum / durations.size();
+		double sq_sum = std::inner_product(durations.begin(), durations.end(), durations.begin(), 0.0);
+		double stdev = sqrt(sq_sum / durations.size() - mean * mean);
+		std::cout << "Time " << mean / 1e+6 << " +/- " << stdev / 1e+6 << std::endl;
+		
 	} catch (const char* e) {
 		std::cerr << "Exception was thrown: " << e << std::endl;
 		exit(-1);
 	}
+	return 0;
 }
