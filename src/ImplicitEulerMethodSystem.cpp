@@ -40,13 +40,13 @@ void ImplicitEulerMethodSystem<RightSideOfODE>::getFirstApproximation(double* u)
 }
 
 template<class RightSideOfODE>
-void ImplicitEulerMethodSystem<RightSideOfODE>::setPreviousValue(double* _previousValue) {
+void ImplicitEulerMethodSystem<RightSideOfODE>::setPreviousValue(const double* _previousValue) {
 	for(int i = 0; i < getSize(); i++)
 		previousValue[i] = _previousValue[i];
 }
 
 template<class RightSideOfODE>
-void ImplicitEulerMethodSystem<RightSideOfODE>::getPreviousValue(double* _previousValue) {
+void ImplicitEulerMethodSystem<RightSideOfODE>::getPreviousValue(double* _previousValue) const {
 	for(int i = 0; i < getSize(); i++)
 		_previousValue[i] = previousValue[i];
 }

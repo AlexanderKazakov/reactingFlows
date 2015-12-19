@@ -6,7 +6,6 @@
 
 template<class RightSideOfODE>
 ImplicitEulerMethod<RightSideOfODE>::ImplicitEulerMethod() {
-	theNewtonMethod.logging = false;
 }
 
 template<class RightSideOfODE>
@@ -14,7 +13,7 @@ void ImplicitEulerMethod<RightSideOfODE>::setTauAndT(double _tau, double _T) {
 		
 	tau = _tau;
 	T = _T;
-	implicitEulerMethodSystem.setTau(_tau);
+	theNewtonMethod.setSystemCustomParam(tau);
 }
 
 template<class RightSideOfODE>
@@ -24,20 +23,20 @@ ImplicitEulerMethod<RightSideOfODE>::~ImplicitEulerMethod() {
 
 template<class RightSideOfODE>
 void ImplicitEulerMethod<RightSideOfODE>::calculate() {
-	double* initial = new double [implicitEulerMethodSystem.getSize()];
-	implicitEulerMethodSystem.getFirstApproximation(initial);
+//	double* initial = new double [implicitEulerMethodSystem.getSize()];
+//	implicitEulerMethodSystem.getFirstApproximation(initial);
 //	implicitEulerMethodSystem.printCompleteSolution(initial);
 //	printSolutionToFile(t, initial);
 	
 	while (t < T && nextStep());
-	delete [] initial;
+//	delete [] initial;
 }
 
 template<class RightSideOfODE>
 bool ImplicitEulerMethod<RightSideOfODE>::nextStep() {
 	double* solution = new double[implicitEulerMethodSystem.getSize()];
 	if( !theNewtonMethod.solve(solution) ) {
-		implicitEulerMethodSystem.getPreviousValue(solution);
+		theNewtonMethod.getSystemCustomValue(solution);
 		if (fabs(solution[0] - 1.98) > 0.1) throw "rho invalid";
 		if (fabs(solution[1] - 1.02) > 0.1) throw "u invalid";
 		if (fabs(solution[2] - 1.72) > 0.1) throw "p invalid";
@@ -47,7 +46,7 @@ bool ImplicitEulerMethod<RightSideOfODE>::nextStep() {
 //	implicitEulerMethodSystem.printCompleteSolution(solution);
 //	printSolutionToFile(t, solution);
 	
-	implicitEulerMethodSystem.setPreviousValue(solution);
+	theNewtonMethod.setSystemCustomValue(solution);
 	delete [] solution;
 	t += tau;
 	return true;

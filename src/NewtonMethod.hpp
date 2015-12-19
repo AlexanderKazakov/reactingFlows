@@ -9,6 +9,9 @@ template<class System>
 class NewtonMethod {
 public:
 	NewtonMethod();
+	void setSystemCustomParam(const double& param) {system.setCustomParam(param);};
+	void setSystemCustomValue(const double* value) {system.setCustomValue(value);};
+	void getSystemCustomValue(double* value) {system.getCustomValue(value);};
 	bool logging = false;
 
 	/**

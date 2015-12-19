@@ -21,6 +21,10 @@ public:
 	void printCompleteSolution(const double* f) const;
 	double residualError(const double* u) const;
 	
+	void setCustomParam(const double& param) {};
+	void setCustomValue(const double* value) {};
+	void getCustomValue(const double* value) const {};
+	
 private:
 	const double A = 1.64e+9 / A_dimensionless;
 	const double Ea = 167e+3 / E_dimensionless;

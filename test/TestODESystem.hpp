@@ -15,7 +15,9 @@ public:
 	
 	void getAnalyticalSolution(double* analytSol, const double t) const;
 	double residualError(const double* u) const;
-
+	void setCustomParam(const double& param) {};
+	void setCustomValue(const double* value) {};
+	void getCustomValue(const double* value) const {};
 private:
 	
 	double a;

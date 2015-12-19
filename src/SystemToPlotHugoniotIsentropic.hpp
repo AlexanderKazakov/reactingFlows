@@ -24,6 +24,10 @@ public:
 	void printCompleteSolution(const double* u) const;
 	double residualError(const double* u) const;
 	
+	void setCustomParam(const double& param) {};
+	void setCustomValue(const double* value) {};
+	void getCustomValue(const double* value) const {};
+	
 private:
 #if CONST_GAMMA
 	/* The mixture of products of reaction behind the front of discontinuity */

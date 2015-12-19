@@ -14,7 +14,9 @@ public:
 	void getFirstApproximation(double* u) const;
 	void printCompleteSolution(const double* u) const {};
 	double residualError(const double* u) const;
-
+	void setCustomParam(const double& param) {};
+	void setCustomValue(const double* value) {};
+	void getCustomValue(const double* value) const {};
 private:
 	const double A[LES_SIZE][LES_SIZE] = {{ 6, 5, 1 },
 	                                      { 1, 0, 2 },
