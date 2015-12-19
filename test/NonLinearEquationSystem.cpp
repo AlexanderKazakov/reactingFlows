@@ -1,7 +1,7 @@
 #include "test/NonLinearEquationSystem.hpp"
 
-NonLinearEquationSystem::NonLinearEquationSystem() : EquationSystem(2)
-{
+NonLinearEquationSystem::NonLinearEquationSystem() : EquationSystem(2) {
+	implementation = NON_LINEAR_EQUATION;
 }
 
 double NonLinearEquationSystem::getValue(const int i, const double* u) const {

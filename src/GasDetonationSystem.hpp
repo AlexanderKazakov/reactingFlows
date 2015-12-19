@@ -18,11 +18,10 @@ class GasDetonationSystem : public EquationSystem {
 public:
 	GasDetonationSystem();
 
-	virtual double getValue(const int i, const double* u) const override;
-	virtual double getDerivative(const int i, const int j,
-	                             const double* u) const override;
-	virtual void getFirstApproximation(double* u) const override;
-	virtual void printCompleteSolution(const double* u) const override;
+	double getValue(const int i, const double* u) const;
+	double getDerivative(const int i, const int j, const double* u) const;
+	void getFirstApproximation(double* u) const;
+	void printCompleteSolution(const double* u) const;
 
 
 private:

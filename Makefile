@@ -14,11 +14,13 @@ SOURCES=$(SRCDIR)NewtonMethod.cpp $(SRCDIR)util.cpp \
         $(SRCDIR)ImplicitEulerMethod.cpp \
         $(SRCDIR)ImplicitEulerMethodSystem.cpp \
         $(SRCDIR)ZeldovichSystem.cpp
-TESTS=$(TESTDIR)test.cpp $(TESTDIR)LinearEquationSystem.cpp \
+TESTMAIN=$(TESTDIR)test.cpp 
+TESTS=$(TESTDIR)LinearEquationSystem.cpp \
       $(TESTDIR)NonLinearEquationSystem.cpp \
       $(TESTDIR)TestODESystem.cpp
 
 MAINOBJ=$(MAINFILE:.cpp=.o)
+TESTMAINOBJ=$(TESTMAIN:.cpp=.o)
 OBJECTS=$(SOURCES:.cpp=.o)
 TESTOBJS=$(TESTS:.cpp=.o)
 
@@ -27,13 +29,13 @@ TEST=$(BUILDDIR)test1
 
 all: $(EXECUTABLE) $(TEST)
 
-$(EXECUTABLE): $(OBJECTS) $(MAINOBJ)
-	$(CC) $(OBJECTS) $(MAINOBJ) -o $@ $(LFLAGS)
+$(EXECUTABLE): $(OBJECTS) $(TESTOBJS) $(MAINOBJ)
+	$(CC) $(OBJECTS) $(TESTOBJS) $(MAINOBJ) -o $@ $(LFLAGS)
 
 test: $(TEST)
 	
-$(TEST): $(TESTOBJS) $(OBJECTS)
-	$(CC) $(TESTOBJS) $(OBJECTS) -o $@ $(LFLAGS)
+$(TEST): $(TESTOBJS) $(OBJECTS) $(TESTMAINOBJ)
+	$(CC) $(TESTOBJS) $(OBJECTS) $(TESTMAINOBJ) -o $@ $(LFLAGS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
@@ -49,7 +51,7 @@ exec2: $(EXECUTABLE) $(TEST)
 	eog ZeldovichPRho.png
 
 clean:   
-	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS) \
+	rm -f $(EXECUTABLE) $(TEST) $(OBJECTS) $(MAINOBJ) $(TESTOBJS) $(TESTMAINOBJ) \
 	residualError.txt HugoniotIsentropic.txt \ 
 	rm -f hugoniot.png residualError.png hugoniotDeflagration.png \
 	hugoniotDetonation.png

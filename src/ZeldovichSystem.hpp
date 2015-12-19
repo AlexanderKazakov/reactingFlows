@@ -15,11 +15,10 @@ public:
 	ZeldovichSystem();
 	~ZeldovichSystem();
 
-	virtual double getValue(const int i, const double* f) const override;
-	virtual double getDerivative(const int i, const int j,
-	                             const double* f) const override;
-	virtual void getFirstApproximation(double* f) const override;
-	virtual void printCompleteSolution(const double* f) const override;
+	double getValue(const int i, const double* f) const;
+	double getDerivative(const int i, const int j, const double* f) const;
+	void getFirstApproximation(double* f) const;
+	void printCompleteSolution(const double* f) const;
 
 private:
 	const double A = 1.64e+9 / A_dimensionless;

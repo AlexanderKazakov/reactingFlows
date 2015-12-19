@@ -6,6 +6,8 @@
 SystemToPlotHugoniotIsentropic::SystemToPlotHugoniotIsentropic
 	(const double& givenEta) : EquationSystem(3), givenEta(givenEta) {
 	
+	implementation = PLOT_HUGONIOT_ISENTROPIC;
+	
 	before.setReagents({std::make_pair("C2H2", 0.0705),
 	                    std::make_pair("O2",   0.2168),
 	                    std::make_pair("N2",   0.7127)});

@@ -6,6 +6,8 @@
 ImplicitEulerMethodSystem::ImplicitEulerMethodSystem(EquationSystem* rightSideOfODE, double tau) : 
 		EquationSystem(rightSideOfODE->getSize()), rightSideOfODE(rightSideOfODE), tau(tau)
 {
+	implementation = IMPLICIT_EULER_METHOD;
+	
 	previousValue = new double [getSize()];
 	rightSideOfODE->getFirstApproximation(previousValue);
 }

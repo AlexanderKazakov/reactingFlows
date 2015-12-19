@@ -2,8 +2,8 @@
 #define	EQUATIONSYSTEM_HPP
 
 /**
- * An abstract class for system of equations representation.
- * All concrete system should derived from it.
+ * A base class for system of equations representation.
+ * All concrete system should realize its methods.
  * The general view of the system is 
  * \vec{f}(\vec{u}) = \vec{0}.
  * The number of variables is equal to the number of equations.
@@ -12,6 +12,10 @@ class EquationSystem {
 private:
 	/* Size of \vec{f} and \vec{u} */
 	const int size;
+protected:
+	enum IMPLEMENTATION {BASE, GAS_DETONATION, IMPLICIT_EULER_METHOD, PLOT_HUGONIOT_ISENTROPIC, 
+			PLOT_SHOCK_ISENTROPIC, ZELDOVICH, LINEAR_EQUATION, NON_LINEAR_EQUATION, TEST_ODE};
+	IMPLEMENTATION implementation = IMPLEMENTATION::BASE;
 public:
 	EquationSystem(const int size);
 	int getSize() const;
@@ -25,7 +29,7 @@ public:
      * @param u pointer to array of doubles of size == size of the system
      * @return value in point u
      */
-	virtual double getValue(const int i, const double* u) const = 0;
+	double getValue(const int i, const double* u) const;
 	/**
 	 * The Jacobian d \vec{f} / d \vec{u}
      * @param i index of string
@@ -34,16 +38,15 @@ public:
      * @return derivative of i-th component of \vec{f} by j-th component 
 	 * of argument vector in point u
      */
-	virtual double getDerivative(const int i, const int j, 
-	                             const double* u) const = 0;
+	double getDerivative(const int i, const int j, const double* u) const;
 	/**
 	 * Give some reasonable first approximation for the root of equation
      * @param u pointer to array of doubles of size == size of the system 
 	 * to place first approximation in
      */
-	virtual void getFirstApproximation(double* u) const = 0;
+	void getFirstApproximation(double* u) const;
 
-	virtual void printCompleteSolution(const double* u) const = 0;
+	void printCompleteSolution(const double* u) const;
 };
 
 #endif	/* EQUATIONSYSTEM_HPP */

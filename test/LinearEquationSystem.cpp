@@ -1,7 +1,7 @@
 #include "test/LinearEquationSystem.hpp"
 
-LinearEquationSystem::LinearEquationSystem() : EquationSystem(LES_SIZE)
-{
+LinearEquationSystem::LinearEquationSystem() : EquationSystem(LES_SIZE) {
+	implementation = LINEAR_EQUATION;
 }
 
 double LinearEquationSystem::getValue(const int i, const double* u) const {

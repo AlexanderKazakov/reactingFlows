@@ -5,6 +5,8 @@
 
 
 TestODESystem::TestODESystem() : EquationSystem(2) {
+	implementation = TEST_ODE;
+	
 	a = -10;
 	b = -1;
 	A[0][0] = A[1][1] = (a + b) / 2;

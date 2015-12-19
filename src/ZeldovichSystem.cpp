@@ -4,6 +4,7 @@
 
 
 ZeldovichSystem::ZeldovichSystem() : EquationSystem(4) {
+	implementation = ZELDOVICH;
 }
 
 ZeldovichSystem::~ZeldovichSystem() {

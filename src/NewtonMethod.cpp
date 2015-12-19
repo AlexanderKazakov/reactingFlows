@@ -66,7 +66,7 @@ void NewtonMethod::doIteration(const EquationSystem& system, double* solution) {
 	
 	for(int i = 0; i < n; i++) {
 		const double deltaU = gsl_vector_get(x, i);
-		solution[i] += deltaU;
+		solution[i] += deltaU / 2;
 	}
 }
 

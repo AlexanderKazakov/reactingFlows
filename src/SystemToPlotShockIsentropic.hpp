@@ -4,6 +4,7 @@
 #include "src/EquationSystem.hpp"
 #include "src/Mixture.hpp"
 #include "src/ConstMixture.hpp"
+#include "SystemToPlotHugoniotIsentropic.hpp"
 
 /**
  * A system to calculate Hugoniot isentropic parameters by given eta
@@ -17,11 +18,10 @@ class SystemToPlotShockIsentropic : public EquationSystem {
 public:
 	SystemToPlotShockIsentropic(const double& givenEta);
 
-	virtual double getValue(const int i, const double* u) const override;
-	virtual double getDerivative(const int i, const int j,
-	                             const double* u) const override;
-	virtual void getFirstApproximation(double* u) const override;
-	virtual void printCompleteSolution(const double* u) const override;
+	double getValue(const int i, const double* u) const;
+	double getDerivative(const int i, const int j, const double* u) const;
+	void getFirstApproximation(double* u) const;
+	void printCompleteSolution(const double* u) const;
 
 private:
 #if CONST_GAMMA
