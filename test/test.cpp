@@ -62,6 +62,6 @@ int testTask1(int argc, char** argv) {
 
 
 int main(int argc, char** argv) {
-//	testTask1(argc, argv);
+	testTask1(argc, argv);
 	testTask2(argc, argv);
 }
